@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.model_selection import train_test_split
 
 
-from config import BATCH_SIZE, LEARNING_RATE, LOSS_FN, N_EPOCHS, OPTIMIZER, SEED
+from sfs.config import BATCH_SIZE, LEARNING_RATE, LOSS_FN, N_EPOCHS, OPTIMIZER, SEED
 
 
 @dataclass(frozen=True)

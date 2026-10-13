@@ -1,0 +1,14 @@
+[project]
+name = "sfs"
+version = "0.1.0"
+description = "Neural network experiments on MNIST"
+requires-python = ">=3.11"
+
+dependencies = [
+    "torch",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "jupyter",
+]

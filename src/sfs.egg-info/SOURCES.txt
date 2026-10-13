@@ -1,0 +1,10 @@
+pyproject.toml
+src/sfs/__init__.py
+src/sfs/config.py
+src/sfs/models.py
+src/sfs/training.py
+src/sfs.egg-info/PKG-INFO
+src/sfs.egg-info/SOURCES.txt
+src/sfs.egg-info/dependency_links.txt
+src/sfs.egg-info/requires.txt
+src/sfs.egg-info/top_level.txt

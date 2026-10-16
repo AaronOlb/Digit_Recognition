@@ -79,7 +79,9 @@ def train(
     n_epochs=N_EPOCHS,
     batch_size=BATCH_SIZE,
     learning_rate=LEARNING_RATE,
+    predictions_path: str | Path | None = None,
 ):
+    """Return epoch metrics and optionally save final validation predictions to CSV."""
 
     train_loader = DataLoader(
         TensorDataset(data.train_features, data.train_labels),
@@ -119,6 +121,8 @@ def train(
         model.eval()
         val_loss = 0
         correct = 0
+        save_predictions = predictions_path is not None and epoch == n_epochs - 1
+        val_probabilities = []
 
         with torch.inference_mode():
             for X, y in val_loader:
@@ -129,6 +133,18 @@ def train(
 
                 predictions = logits.argmax(dim=1)
                 correct += (predictions == y).sum().item()
+                if save_predictions:
+                    val_probabilities.append(logits.softmax(dim=1).cpu())
+
+        if save_predictions:
+            probabilities = torch.cat(val_probabilities).numpy()
+            prediction_df = pd.DataFrame({
+                "true_label": data.val_labels.cpu().numpy(),
+                "predicted_label": probabilities.argmax(axis=1),
+            }, index=data.val_index)
+            for class_id in range(probabilities.shape[1]):
+                prediction_df[f"probability_{class_id}"] = probabilities[:, class_id]
+            prediction_df.to_csv(predictions_path, index_label="row_index")
 
         history.append({
             "epoch": epoch + 1,

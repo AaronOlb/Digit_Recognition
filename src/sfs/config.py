@@ -12,7 +12,7 @@ OPTIMIZER = torch.optim.Adam
 class CNNConfig:
     def __init__(
         self,
-        channels=(1, 16, 32),
+        channels=(1, 16),
         kernel_size=3,
         padding=1,
         pooling_kernel_size=2,

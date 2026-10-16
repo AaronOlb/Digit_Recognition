@@ -114,7 +114,7 @@ def train(
             loss.backward()
             optimizer.step()
 
-            train_loss += loss.item() * len(y)
+            train_loss += loss.item() * len(y) 
 
         model.eval()
         val_loss = 0
